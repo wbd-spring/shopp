@@ -1,0 +1,39 @@
+server:
+  port: 8090
+
+eureka: 
+  client:
+    serviceUrl: 
+      defaultZone: http://localhost:8080/eureka/
+spring:
+  application:
+    name: member 
+  datasource: 
+    type: com.alibaba.druid.pool.DruidDataSource            # 当前数据源操作类型
+    driver-class-name: org.gjt.mm.mysql.Driver              # mysql驱动包
+    url: jdbc:mysql://118.190.71.215:3306/project              # 数据库名称
+    username: rmtuser
+    password: 123456
+    dbcp2:
+      min-idle: 5                                           # 数据库连接池的最小维持连接数
+      initial-size: 5                                       # 初始化连接数
+      max-total: 5                                          # 最大连接数
+      max-wait-millis: 200   
+      
+  redis:  ##redis连接信息
+    host: 118.190.71.215
+    port: 6379
+    pool:
+      max-idle: 100
+      min-idle: 1
+      max-active: 1000
+      max-wait: -1 
+      
+    ##activemq连接信息
+  activemq:
+    broker-url: tcp://118.190.71.215:61616
+    in-memory: true
+    pool:
+      enabled: false
+ 
+  

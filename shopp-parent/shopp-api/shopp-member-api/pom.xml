@@ -6,4 +6,13 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>shopp-member-api</artifactId>
+  <dependencies>
+  
+  	<dependency>
+  		<groupId>com.wbd</groupId>
+  		<artifactId>shopp-common</artifactId>
+  		<version>${project.version}</version>
+  	</dependency>
+  	
+  </dependencies>
 </project>

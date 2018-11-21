@@ -1,0 +1,38 @@
+server:
+  port: 8091
+
+eureka: 
+  client:
+    serviceUrl: 
+      defaultZone: http://localhost:8080/eureka/
+      
+      
+spring:
+  application:
+    name: message 
+    
+      
+   ##activemq连接信息
+  activemq:
+    broker-url: tcp://118.190.71.215:61616
+    in-memory: true
+    pool:
+      enabled: false
+##队列      
+  messages:  
+   queue: messages_queue
+ 
+  mail:
+   host: smtp.qq.com
+   username: 285917033@qq.com
+   password: nerhzbqpncsscafe
+   enable:  true
+   smtp:
+    auth: true
+    starttls:
+    enable: true
+    required: true
+msg: 
+  subject: 万贝金服，会员注册成功邮件。
+  text:  恭喜您的账户{},注册成功!万贝金服|万贝金服 深圳万贝金服信息服务科技有限公司 www.wanbeidai.com
+  

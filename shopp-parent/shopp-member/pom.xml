@@ -1,21 +1,62 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>com.wbd</groupId>
-    <artifactId>shopp-parent</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-  </parent>
-  <artifactId>shopp-member</artifactId>
-  <dependencies>
-  	<dependency>
-  		<groupId>com.wbd</groupId>
-  		<artifactId>shopp-common</artifactId>
-  		<version>${project.version}</version>
-  	</dependency>
-  	<dependency>
-  		<groupId>com.wbd</groupId>
-  		<artifactId>shopp-member-api</artifactId>
-  		<version>${project.version}</version>
-  	</dependency>
-  </dependencies>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.wbd</groupId>
+		<artifactId>shopp-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>shopp-member</artifactId>
+	<dependencies>
+		<!-- 公共模块 -->
+		<dependency>
+			<groupId>com.wbd</groupId>
+			<artifactId>shopp-common</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<!-- member-api接口 -->
+		<dependency>
+			<groupId>com.wbd</groupId>
+			<artifactId>shopp-member-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<!-- eureka client -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-eureka</artifactId>
+		</dependency>
+
+		<!-- 数据库连接池 -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+		</dependency>
+
+		<!-- 数据库 -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+		</dependency>
+
+		<!-- springboot整合mybatis -->
+		<dependency>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+		</dependency>
+		
+		<!-- activemq 消息中间件 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-activemq</artifactId>
+		</dependency>
+
+	</dependencies>
 </project>

@@ -23,12 +23,11 @@
 		<lang3.version>3.4</lang3.version>
 		<mybatis.version>3.4.0</mybatis.version>
 		<mapper.version>3.3.7</mapper.version>
-		<httpclient.version>3.1</httpclient.version>
+		<httpclient.version>4.3.5</httpclient.version>
 		<fastjson.version>1.2.30</fastjson.version>
 		<net.version>3.3</net.version>
-		<httpcomponents.version>4.1</httpcomponents.version>
 		<context-support.version>4.2.4.RELEASE</context-support.version>
-
+	
 		<jackson.version>1.9.2</jackson.version>
 
 	</properties>
@@ -101,15 +100,11 @@
 			</dependency>
 
 			<!-- httpclient -->
-			<dependency>
-				<groupId>commons-httpclient</groupId>
-				<artifactId>commons-httpclient</artifactId>
-				<version>${httpclient.version}</version>
-			</dependency>
+			
 			<dependency>
 				<groupId>org.apache.httpcomponents</groupId>
 				<artifactId>httpclient</artifactId>
-				<version>${httpcomponents.version}</version>
+				<version>${httpclient.version}</version>
 			</dependency>
 
 			<!-- json -->
@@ -164,9 +159,11 @@
 				<version>${log4j.version}</version>
 			</dependency>
 
+    <dependency>
+     <groupId>com.alibaba</groupId>
+     <artifactId>druid</artifactId>
+   </dependency>
 
-			<!-- <dependency> <groupId>com.fasterxml.jackson.core</groupId> <artifactId>jackson-databind</artifactId> 
-				<version>${jackson.version}</version> </dependency> -->
 
 			<dependency>
 				<groupId>org.codehaus.jackson</groupId>
@@ -190,5 +187,6 @@
 		<module>shopp-eureka-server</module>
 		<module>shopp-api</module>
 		<module>shopp-member</module>
+		<module>shopp-message</module>
 	</modules>
 </project>

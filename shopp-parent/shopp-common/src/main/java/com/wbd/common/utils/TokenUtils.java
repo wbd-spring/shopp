@@ -8,4 +8,8 @@ public class TokenUtils {
 		 return "TOKEN_MEMBER-"+UUID.randomUUID();
 	 }
 	
+	 
+	 public static String getPayToken() {
+			return "TOKEN_PAY" + "-" + UUID.randomUUID();
+		}
 }

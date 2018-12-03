@@ -20,5 +20,6 @@ public class UserEntity implements Serializable{
 	private String email;
 	private Date created;
 	private Date updated;
+	private String openid;
 
 }

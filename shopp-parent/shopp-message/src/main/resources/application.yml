@@ -4,7 +4,7 @@ server:
 eureka: 
   client:
     serviceUrl: 
-      defaultZone: http://localhost:8080/eureka/
+      defaultZone: http://localhost:7080/eureka/
       
       
 spring:
@@ -23,9 +23,9 @@ spring:
    queue: messages_queue
  
   mail:
-   host: smtp.qq.com
-   username: 285917033@qq.com
-   password: nerhzbqpncsscafe
+   host: smtp.163.com
+   username: zghweb123@163.com
+   password: qwertyuiop123
    enable:  true
    smtp:
     auth: true

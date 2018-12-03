@@ -1,9 +1,12 @@
 package com.wbd.member.service.impl;
 
+import java.util.Date;
+
 import org.apache.activemq.command.ActiveMQQueue;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSONObject;
@@ -32,17 +35,17 @@ public class MemberServiceImpl implements MemberService {
 		return WBDResult.build(200, "success");
 	}
 
-	public WBDResult setRedis(String key, String value) {
+	public WBDResult setRedis(@RequestParam("key") String key, @RequestParam("value") String value){
 		baseRedisService.setString(key, value);
 		return WBDResult.ok();
 	}
 
-	public WBDResult getRedis(String key) {
+	public WBDResult getRedis(@RequestParam("value")String key) {
 		String value = baseRedisService.getString(key);
 		return WBDResult.ok(value);
 	}
 
-	public WBDResult findByUserId(Long userId) {
+	public WBDResult findByUserId(@RequestParam("userId")Long userId) {
 		UserEntity userEntity = memberDao.findByID(userId);
 		if (userEntity == null) {
 			return WBDResult.build(500, "没有找到对应的信息");
@@ -54,6 +57,8 @@ public class MemberServiceImpl implements MemberService {
 		String passWord = user.getPassword();
 		String newPassWord = MD5Util.MD5(passWord);
 		user.setPassword(newPassWord);
+		user.setCreated(new Date());
+		user.setUpdated(new Date());
 		Integer insertUser = memberDao.insertUser(user);
 		if (insertUser <= 0) {
 			return WBDResult.build(500, "插入用户数据失败");
@@ -105,7 +110,7 @@ public class MemberServiceImpl implements MemberService {
 		registerMailboxProducer.sendMsg(activeMQQueue, json);
 	}
 
-	public WBDResult login(String username, String password) {
+	public WBDResult login(@RequestParam("username") String username, @RequestParam("password") String password) {
 
 		// 1.非空判断
 		if (StringUtils.isEmpty(username)) {
@@ -123,6 +128,19 @@ public class MemberServiceImpl implements MemberService {
 		// 2.查询
 		UserEntity userEntity = memberDao.login(username, newPwd);
 
+		//3.调用自动登录
+		return setLogin(userEntity);
+	}
+
+	
+	/**
+	 * 自动登录，生成token，写入redis，返回token
+	 * <p>Title: setLogin</p>  
+	 * <p>Description: </p>  
+	 * @param userEntity
+	 * @return
+	 */
+	private WBDResult setLogin(UserEntity userEntity) {
 		if (userEntity == null) {
 			return WBDResult.build(500, "用户名或者密码有误");
 		}
@@ -145,7 +163,7 @@ public class MemberServiceImpl implements MemberService {
 		return WBDResult.ok(json);
 	}
 
-	public WBDResult findByToken(String token) {
+	public WBDResult findByToken(@RequestParam("token") String token) {
 
 		// 1.验证
 		if (StringUtils.isEmpty(token)) {
@@ -171,6 +189,53 @@ public class MemberServiceImpl implements MemberService {
 
 		userEntity.setPassword("");
 		return WBDResult.ok(userEntity);
+	}
+
+	public WBDResult findByOpenId(String openid) {
+		//验证
+		if (StringUtils.isEmpty(openid)) {
+			return WBDResult.build(500, "openid不能为null");
+		}
+		//使用openid查询数据库信息
+		UserEntity userEntity = memberDao.findByOpenIdUser(openid);
+		
+		if(userEntity==null) {
+			
+			return WBDResult.build(500, "该用户为关联");
+		}
+		//如果关联，自动登录
+		
+		return this.setLogin(userEntity);
+	}
+
+	public WBDResult qqLogin(UserEntity user) {
+		
+		//1.判断openid
+		String openid = user.getOpenid();
+		if(StringUtils.isEmpty(openid)) {
+			return WBDResult.build(500, "openid不能为null");
+		}
+		//2.进行账户登录
+		WBDResult wBDResult = this.login(user.getUsername(), user.getPassword());
+		if(wBDResult.getStatus()!=200) {
+			return wBDResult;
+		}
+		//3.自动登录， 更新openid
+		JSONObject obj = (JSONObject) wBDResult.getData();
+	    String token = 	obj.getString("token");
+	   
+	    //4.根据token找到id
+	    WBDResult wbdResult2 = this.findByToken(token);
+	    if(wbdResult2.getStatus()!=200) {
+			return wbdResult2;
+		}
+	     //5. 更新openid
+	    UserEntity ue= (UserEntity) wbdResult2.getData();
+	    Integer updateResult = memberDao.updateByOpenIdUser(openid, ue.getId());
+	    if(updateResult<=0) {
+	    	WBDResult.build(500, "关联账户失败");
+	    }
+		return wBDResult;
 	}
 
 }

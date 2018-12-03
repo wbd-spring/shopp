@@ -29,6 +29,7 @@
 		<context-support.version>4.2.4.RELEASE</context-support.version>
 	
 		<jackson.version>1.9.2</jackson.version>
+		<dom4j.version>1.6.1</dom4j.version>
 
 	</properties>
 
@@ -164,7 +165,11 @@
      <artifactId>druid</artifactId>
    </dependency>
 
-
+<dependency>
+    <groupId>dom4j</groupId>
+    <artifactId>dom4j</artifactId>
+    <version>${dom4j.version}</version>
+</dependency>
 			<dependency>
 				<groupId>org.codehaus.jackson</groupId>
 				<artifactId>jackson-mapper-asl</artifactId>
@@ -188,5 +193,8 @@
 		<module>shopp-api</module>
 		<module>shopp-member</module>
 		<module>shopp-message</module>
+		<module>shopp-pc-web</module>
+		<module>shopp-weixin</module>
+		<module>shopp-pay</module>
 	</modules>
 </project>

@@ -1,0 +1,66 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.wbd</groupId>
+		<artifactId>shopp-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>shopp-pc-web</artifactId>
+
+	<dependencies>
+		<!-- 公共模块 -->
+		<dependency>
+			<groupId>com.wbd</groupId>
+			<artifactId>shopp-common</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<!-- eureka client -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-eureka</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<!-- feign 客户端负债均衡LB -->
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-feign</artifactId>
+		</dependency>
+
+		<!-- 引入freemarker包 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-freemarker</artifactId>
+		</dependency>
+
+		<!-- member-api接口 -->
+		<dependency>
+			<groupId>com.wbd</groupId>
+			<artifactId>shopp-member-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<!-- qq oauth 生成链接，生成授权码，获取accesstoken相关方法封装包装类 -->
+		<dependency>
+			<groupId>com.sdk4j</groupId>
+			<artifactId>sdk4j</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.wbd</groupId>
+			<artifactId>shopp-pay-api</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
+
+</project>

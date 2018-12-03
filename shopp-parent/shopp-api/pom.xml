@@ -19,5 +19,6 @@
 
 	<modules>
 		<module>shopp-member-api</module>
+		<module>shopp-pay-api</module>
 	</modules>
 </project>

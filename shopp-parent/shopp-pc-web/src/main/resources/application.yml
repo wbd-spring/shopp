@@ -1,0 +1,13 @@
+server:
+  port: 80
+
+eureka: 
+  client:
+    serviceUrl: 
+      defaultZone: http://localhost:7080/eureka/
+spring:
+  application:
+    name: pc-web
+  
+ 
+  
